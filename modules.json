@@ -1,0 +1,11 @@
+{
+    "name": "Arcadia-Science/hifi2genome",
+    "homePage": "https://github.com/Arcadia-Science/hifi2genome",
+    "repos": {
+        "https://github.com/nf-core/modules.git": {
+            "modules": {
+                "nf-core": {}
+            }
+        }
+    }
+}
