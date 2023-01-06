@@ -65,7 +65,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           allow-repeats: false
 
-  # TODO: Uncomment the following section to make the nf-core lint run periodically.
+  # uncomment below to run nf-core linting, leave commented for now because of past issues
   # Note: you may have to adjust the environment variables for your GitHub actions
   # nf-core:
   #   runs-on: ubuntu-latest

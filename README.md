@@ -8,15 +8,10 @@
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 [![Launch on Nextflow Tower](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Nextflow%20Tower-%234256e7)](https://tower.nf/launch?pipeline=https://github.com/Arcadia-Science/hifi2genome)
 
-## Introduction
 
-<!-- TODO: Write a 1-2 sentence summary of what data the pipeline is for and what it does -->
-
-**Arcadia-Science/hifi2genome** is Assemble PacBio Hifi reads into a genome and perform QC stats.
+**Arcadia-Science/hifi2genome** is a workflow for assembling PacBio Hifi reads into single genomes and performing QC stats on the assembled genomes.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
-
-<!-- TODO: Add full-sized test dataset and amend the paragraph below if applicable -->
 
 ## Pipeline summary
 
