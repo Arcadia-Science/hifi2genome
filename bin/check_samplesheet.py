@@ -5,6 +5,7 @@ import sys
 import errno
 import argparse
 
+
 def parse_args(args=None):
     Description = "Check contents of input samplesheet CSV"
     Epilog = "Example usage: python check_samplesheet.py <FILE_IN> <FILE_OUT>"
@@ -14,6 +15,7 @@ def parse_args(args=None):
     parser.add_argument("FILE_OUT", help="Output file")
     return parser.parse_args(args)
 
+
 def make_dir(path):
     if len(path) > 0:
         try:
@@ -22,12 +24,14 @@ def make_dir(path):
             if exception.errno != errno.EXIST:
                 raise exception
 
+
 def print_error(error, context="Line", context_str=""):
     error_str = f"ERROR: Please check samplesheet -> {error}"
     if context != "" and context_str != "":
         error_str = f"ERROR: Please check samplesheet -> {error}\n{context.strip()}: '{context_str.strip()}'"
     print(error_str)
     sys.exit(1)
+
 
 def check_samplesheet(file_in, file_out):
     """
@@ -53,25 +57,22 @@ def check_samplesheet(file_in, file_out):
             # check valid number of columns per row
             if len(lspl) < len(HEADER):
                 print_error(
-                    f"Invalid number of columns (minimum = {len(HEADER)})!"
-                    "Line",
+                    f"Invalid number of columns (minimum = {len(HEADER)})!" "Line",
                     line,
                 )
             num_cols = len([x for x in lspl if x])
             if num_cols < MIN_COLS:
                 print_error(
-                    f"Invalid number of populated columns (minimum = {MIN_COLS})!"
-                    "Line",
+                    f"Invalid number of populated columns (minimum = {MIN_COLS})!" "Line",
                     line,
                 )
             # check sample name entires
-            sample,fastq = lspl[: len(HEADER)]
+            sample, fastq = lspl[: len(HEADER)]
             if sample.find(" ") != -1:
                 print(f"WARNING: Spaces have been replaced by underscores for sample: {sample}")
                 sample = sample.replace(" ", "_")
             if not sample:
                 print_error("Sample entry has not been specified!", "Line", line)
-
 
             # check fastq file extensions
             for reads in [fastq]:
@@ -108,9 +109,11 @@ def check_samplesheet(file_in, file_out):
     else:
         print_error(f"No entires to process!", "Samplesheet: {file_in}")
 
+
 def main(args=None):
     args = parse_args(args)
     check_samplesheet(args.FILE_IN, args.FILE_OUT)
+
 
 if __name__ == "__main__":
     sys.exit(main())
