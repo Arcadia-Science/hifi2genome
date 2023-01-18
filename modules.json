@@ -4,7 +4,24 @@
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
-                "nf-core": {}
+                "nf-core": {
+                    "busco": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c"
+                    },
+                    "hifiasm": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c"
+                    },
+                    "minimap2/align": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c"
+                    },
+                    "minimap2/index": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c"
+                    }
+                }
             }
         }
     }
