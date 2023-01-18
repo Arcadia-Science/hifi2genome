@@ -18,7 +18,7 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input sample
     IMPORT LOCAL MODULES/SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { CHECK_SAMPLESHEET             } from '../modules/local/check_samplesheet.nf'
+include { INPUT_CHECK             } from '../subworkflows/local/input_check.nf'
 
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
@@ -43,14 +43,19 @@ workflow HIFI2GENOME {
     ch_versions = Channel.empty()
 
     // read in samplesheet
-    CHECK_SAMPLESHEET (
-        ch_input
-    )
-    ch_versions = ch_versions.mix(CHECK_SAMPLESHEET.out.versions)
+    ch_reads = INPUT_CHECK(ch_input)
+    ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     // assembly with hifiasm
+    HIFIASM (
+        ch_reads,
+        [], // path paternal_kmer_dump
+        [] // path maternal_kmer_dump
+    )
+    ch_versions = ch_versions.mix(HIFIASM.out.versions)
 
     // quality check assembly with busco
+
 
     // map reads to indexed assembly with minimap2 subworkflow
 
