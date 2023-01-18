@@ -29,7 +29,7 @@ include { INPUT_CHECK             } from '../subworkflows/local/input_check.nf'
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { HIFIASM                       } from '../modules/nf-core/hifiasm/main'
+include { FLYE                       } from '../modules/nf-core/flye/main'
 include { BUSCO                         } from '../modules/nf-core/busco/main'
 
 
@@ -46,13 +46,12 @@ workflow HIFI2GENOME {
     ch_reads = INPUT_CHECK(ch_input)
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
-    // assembly with hifiasm
-    HIFIASM (
-        ch_reads,
-        [], // path paternal_kmer_dump
-        [] // path maternal_kmer_dump
+    // assembly with flye
+    FLYE (
+        ch_reads.reads, //had to explicitly define .reads here even though module says it wants tuple(meta), path(reads)
+        "--pacbio-hifi"
     )
-    ch_versions = ch_versions.mix(HIFIASM.out.versions)
+    ch_versions = ch_versions.mix(FLYE.out.versions)
 
     // quality check assembly with busco
 
