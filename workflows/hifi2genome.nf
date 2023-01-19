@@ -23,6 +23,7 @@ include { INPUT_CHECK             } from '../subworkflows/local/input_check.nf'
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
+include { MINIMAP2_SUBWORKFLOW    } from '../subworkflows/local/minimap2_subworkflow.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,9 +55,18 @@ workflow HIFI2GENOME {
     ch_versions = ch_versions.mix(FLYE.out.versions)
 
     // quality check assembly with busco
-
+    BUSCO (
+        FLYE.out.fasta,
+        "auto",
+        [],
+        []
+    )
 
     // map reads to indexed assembly with minimap2 subworkflow
+    MINIMAP2_SUBWORKFLOW (
+        FLYE.out.fasta,
+        ch_reads.reads
+    )
 
 }
 
