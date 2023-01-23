@@ -1,4 +1,3 @@
-// TODO: Update the description
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "https://raw.githubusercontent.com/Arcadia-Science/hifi2genome/main/nextflow_schema.json",
@@ -6,12 +5,32 @@
     "description": "Assemble PacBio Hifi reads into a genome and perform QC stats",
     "type": "object",
     "definitions": {
+        "input_output_options": {
+            "title": "input_output_options",
+            "type": "object",
+            "description": "Define where the pipeline should find input data and save output data",
+            "default": "",
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "default": null,
+                    "help_text": "You will need to design a file with information about the sample in your experiment before running the pipeline. Use this parameter to specify the location of the file. It has to be comma-separated."
+                },
+                "outdir": {
+                    "type": "string",
+                    "default": null
+                }
+            },
+            "required": [
+                "input",
+                "outdir"
+            ]
+        },
         "email_options": {
             "title": "Email options",
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should send an email upon completion.",
-            "required": [],
             "properties": {
                 "email": {
                     "type": "string",
@@ -76,7 +95,14 @@
                     "description": "Method used to save pipeline results to output directory.",
                     "help_text": "The Nextflow `publishDir` option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir) for details.",
                     "fa_icon": "fas fa-copy",
-                    "enum": ["symlink", "rellink", "link", "copy", "copyNoFollow", "move"],
+                    "enum": [
+                        "symlink",
+                        "rellink",
+                        "link",
+                        "copy",
+                        "copyNoFollow",
+                        "move"
+                    ],
                     "hidden": true
                 },
                 "email_on_fail": {
@@ -131,6 +157,9 @@
     },
     "allOf": [
         {
+            "$ref": "#/definitions/input_output_options"
+        },
+        {
             "$ref": "#/definitions/email_options"
         },
         {
@@ -139,5 +168,35 @@
         {
             "$ref": "#/definitions/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "hook_url": {
+            "type": "string",
+            "default": null
+        },
+        "custom_config_version": {
+            "type": "string",
+            "default": "master"
+        },
+        "custom_config_base": {
+            "type": "string",
+            "default": "https://raw.githubusercontent.com/nf-core/configs/master"
+        },
+        "config_profile_description": {
+            "type": "string",
+            "default": null
+        },
+        "config_profile_contact": {
+            "type": "string",
+            "default": null
+        },
+        "config_profile_url": {
+            "type": "string",
+            "default": null
+        },
+        "config_profile_name": {
+            "type": "string",
+            "default": null
+        }
+    }
 }
