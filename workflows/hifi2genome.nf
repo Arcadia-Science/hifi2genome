@@ -30,7 +30,6 @@ include { INPUT_CHECK             } from '../subworkflows/local/input_check.nf'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { FLYE                       } from '../modules/nf-core/flye/main'
-include { BUSCO                         } from '../modules/nf-core/busco/main'
 
 
 /*
@@ -43,12 +42,12 @@ workflow HIFI2GENOME {
     ch_versions = Channel.empty()
 
     // read in samplesheet
-    ch_reads = INPUT_CHECK(ch_input)
+    ch_data = INPUT_CHECK(ch_input)
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     // assembly with flye
     FLYE (
-        ch_reads.reads, //had to explicitly define .reads here even though module says it wants tuple(meta), path(reads)
+        ch_data.reads
         "--pacbio-hifi"
     )
     ch_versions = ch_versions.mix(FLYE.out.versions)
