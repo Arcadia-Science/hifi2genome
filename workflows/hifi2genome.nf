@@ -19,6 +19,7 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input sample
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { INPUT_CHECK             } from '../subworkflows/local/input_check.nf'
+include { MINIMAP2_SUBWORKFLOW    } from '../subworkflows/local/minimap2_subworkflow.nf'
 
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
@@ -30,6 +31,8 @@ include { INPUT_CHECK             } from '../subworkflows/local/input_check.nf'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { FLYE                       } from '../modules/nf-core/flye/main'
+include { BUSCO                      } from '../modules/nf-core/busco/main'
+include { CUSTOM_DUMPSOFTWAREVERSIONS} from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
 
 /*
@@ -47,15 +50,32 @@ workflow HIFI2GENOME {
 
     // assembly with flye
     FLYE (
-        ch_data.reads
+        ch_data.reads,
         "--pacbio-hifi"
     )
     ch_versions = ch_versions.mix(FLYE.out.versions)
 
     // quality check assembly with busco
-
+    BUSCO (
+        FLYE.out.fasta,
+        params.lineage,
+        [],
+        []
+    )
+    ch_versions = ch_versions.mix(BUSCO.out.versions)
 
     // map reads to indexed assembly with minimap2 subworkflow
+    MINIMAP2_SUBWORKFLOW (
+        FLYE.out.fasta,
+        ch_data.reads
+    )
+    ch_versions = ch_versions.mix(MINIMAP2_SUBWORKFLOW.out.versions)
+
+
+    // dump software versions
+    CUSTOM_DUMPSOFTWAREVERSIONS (
+    ch_versions.unique().collectFile(name: 'collated_versions.yml')
+    )
 
 }
 

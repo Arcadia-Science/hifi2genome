@@ -28,7 +28,7 @@ include { HIFI2GENOME } from './workflows/hifi2genome'
 //
 // WORKFLOW: Run main Arcadia-Science/hifi2genome analysis pipeline
 //
-workflow NFCORE_HIFI2GENOME {
+workflow ARCADIASCIENCE_HIFI2GENOME {
     HIFI2GENOME ()
 }
 
@@ -43,7 +43,7 @@ workflow NFCORE_HIFI2GENOME {
 // See: https://github.com/nf-core/rnaseq/issues/619
 //
 workflow {
-    NFCORE_HIFI2GENOME ()
+    ARCADIASCIENCE_HIFI2GENOME ()
 }
 
 /*

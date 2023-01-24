@@ -10,7 +10,7 @@ process MINIMAP2_ALIGN {
 
     input:
     tuple val(meta), path(reads)
-    path reference
+    tuple val(index_meta), path(index)
     val bam_format
     val cigar_paf_format
     val cigar_bam
@@ -33,8 +33,8 @@ process MINIMAP2_ALIGN {
     minimap2 \\
         $args \\
         -t $task.cpus \\
-        "${reference ?: reads}" \\
-        "$reads" \\
+        $index \\
+        $reads \\
         $cigar_paf \\
         $set_cigar_bam \\
         $bam_output
