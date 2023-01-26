@@ -71,12 +71,10 @@ workflow HIFI2GENOME {
     )
     ch_versions = ch_versions.mix(MINIMAP2_SUBWORKFLOW.out.versions)
 
-
     // dump software versions
     CUSTOM_DUMPSOFTWAREVERSIONS (
     ch_versions.unique().collectFile(name: 'collated_versions.yml')
     )
-
 }
 
 /*
