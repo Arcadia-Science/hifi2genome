@@ -13,18 +13,34 @@
             "properties": {
                 "input": {
                     "type": "string",
-                    "default": null,
+                    "default": "None",
                     "help_text": "You will need to design a file with information about the sample in your experiment before running the pipeline. Use this parameter to specify the location of the file. It has to be comma-separated."
                 },
                 "outdir": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 }
             },
             "required": [
                 "input",
                 "outdir"
             ]
+        },
+        "busco_options": {
+            "title": "busco_options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "lineage": {
+                    "type": "string",
+                    "default": "auto"
+                },
+                "mode": {
+                    "type": "string",
+                    "default": "genome"
+                }
+            }
         },
         "email_options": {
             "title": "Email options",
@@ -160,6 +176,9 @@
             "$ref": "#/definitions/input_output_options"
         },
         {
+            "$ref": "#/definitions/busco_options"
+        },
+        {
             "$ref": "#/definitions/email_options"
         },
         {
@@ -172,7 +191,7 @@
     "properties": {
         "hook_url": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "custom_config_version": {
             "type": "string",
@@ -184,19 +203,19 @@
         },
         "config_profile_description": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "config_profile_contact": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "config_profile_url": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "config_profile_name": {
             "type": "string",
-            "default": null
+            "default": "None"
         }
     }
 }
