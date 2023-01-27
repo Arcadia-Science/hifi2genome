@@ -13,12 +13,12 @@
             "properties": {
                 "input": {
                     "type": "string",
-                    "default": "None",
+                    "default": "null",
                     "help_text": "You will need to design a file with information about the sample in your experiment before running the pipeline. Use this parameter to specify the location of the file. It has to be comma-separated."
                 },
                 "outdir": {
                     "type": "string",
-                    "default": "None"
+                    "default": "null"
                 }
             },
             "required": [
