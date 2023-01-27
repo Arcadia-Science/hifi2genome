@@ -18,8 +18,9 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input sample
     IMPORT LOCAL MODULES/SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { INPUT_CHECK             } from '../subworkflows/local/input_check.nf'
-include { MINIMAP2_SUBWORKFLOW    } from '../subworkflows/local/minimap2_subworkflow.nf'
+include { INPUT_CHECK             } from '../subworkflows/local/input_check'
+include { MINIMAP2_SUBWORKFLOW    } from '../subworkflows/local/minimap2_subworkflow'
+include { QUAST                   } from '../modules/local/nf-core-modified/quast/main'
 
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
@@ -70,6 +71,12 @@ workflow HIFI2GENOME {
         ch_data.reads
     )
     ch_versions = ch_versions.mix(MINIMAP2_SUBWORKFLOW.out.versions)
+
+    // quast QC on assembly
+    QUAST (
+        FLYE.out.fasta
+    )
+    ch_versions = ch_versions.mix(QUAST.out.versions)
 
     // dump software versions
     CUSTOM_DUMPSOFTWAREVERSIONS (
