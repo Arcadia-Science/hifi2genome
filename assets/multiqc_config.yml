@@ -1,7 +1,9 @@
 report_comment: >
     This is a test
 report_section_order:
-    software_versions:
+    busco:
         order: -1000
+    software_versions:
+        order: -1001
 
 show_analysis_paths: False
