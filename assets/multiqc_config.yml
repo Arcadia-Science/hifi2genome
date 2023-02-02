@@ -1,11 +1,15 @@
 report_comment: >
     This is a test
 report_section_order:
-    quast:
-        order: -1000
-    busco:
-        order: -1001
-    software_versions:
-        order: -1002
+  software_versions:
+    order: -1000
+  hifi2genome-summary:
+    order: -1000
 
-show_analysis_paths: False
+export_plots: true
+
+data_format: "yaml"
+
+top_modules:
+  - "busco"
+  - "quast"

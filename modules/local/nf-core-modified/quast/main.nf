@@ -7,27 +7,27 @@ process QUAST {
         'quay.io/biocontainers/quast:5.2.0--py39pl5321h2add14b_1' }"
 
     input:
-    tuple val (meta), path(assembly)
+    path("*")
 
     output:
-    path "${prefix}"    , emit: results
-    path "versions.yml" , emit: versions
+    path "QUAST/*", type: 'dir'     , emit: qc
+    path '*.tsv'                    , emit: results
+    path "versions.yml"             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args   ?: ''
-    prefix   = task.ext.prefix ?: "${meta.id}"
 
     """
     quast.py \\
-        --output-dir $prefix \\
-        $assembly \\
+        --output-dir QUAST \\
+        *.fasta.gz \\
         --threads $task.cpus \\
         $args
 
-    ln -s ${prefix}/${prefix}_report.tsv
+    ln -s QUAST/report.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

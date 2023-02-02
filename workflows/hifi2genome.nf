@@ -85,7 +85,7 @@ workflow HIFI2GENOME {
 
     // quast QC on assembly
     QUAST (
-        FLYE.out.fasta
+        FLYE.out.fasta.map{it -> it[1]}.collect()
     )
     ch_versions = ch_versions.mix(QUAST.out.versions)
 
@@ -102,6 +102,7 @@ workflow HIFI2GENOME {
     ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
     ch_multiqc_files = ch_multiqc_files.mix(BUSCO.out.short_summaries_txt.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(QUAST.out.results.collect().ifEmpty([]))
 
     MULTIQC(
         ch_multiqc_files.collect(),
