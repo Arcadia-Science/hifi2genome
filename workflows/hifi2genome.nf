@@ -85,7 +85,7 @@ workflow HIFI2GENOME {
 
     // quast QC on assembly
     QUAST (
-        FLYE.out.fasta.map{it -> it[1]}.collect()
+        FLYE.out.fasta.map{it -> it[1]}.collect() // this has to be aggregated because of how QUAST makes the output directory for reporting stats
     )
     ch_versions = ch_versions.mix(QUAST.out.versions)
 
