@@ -67,7 +67,7 @@ class WorkflowMain {
         NfcoreTemplate.checkConfigProvided(workflow, log)
 
         // Check that conda channels are set-up correctly
-        if if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
+        if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
             Utils.checkCondaChannels(log)
         }
 
