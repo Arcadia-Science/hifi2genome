@@ -3,7 +3,7 @@
 //
 
 include { MINIMAP2_INDEX } from '../../modules/nf-core/minimap2/index'
-include { MINIMAP2_ALIGN } from '../../modules/nf-core-modified/minimap2/align'
+include { MINIMAP2_ALIGN } from '../../modules/local/nf-core-modified/minimap2/align'
 
 workflow MINIMAP2_SUBWORKFLOW {
     take:
