@@ -79,7 +79,12 @@ def check_samplesheet(file_in, file_out):
                 if reads:
                     if reads.find(" ") != -1:
                         print_error("Fastq file contains spaces!", "Line", line)
-                    if not reads.endswith(".fastq.gz") and not reads.endswith(".fq.gz") and not reads.endswith(".fastq") and not reads.endswith(".fq"):
+                    if (
+                        not reads.endswith(".fastq.gz")
+                        and not reads.endswith(".fq.gz")
+                        and not reads.endswith(".fastq")
+                        and not reads.endswith(".fq")
+                    ):
                         print_error(
                             "Fastq file does not have extension '.fastq' or '.fq' or compressed '.fastq.gz' or 'fq.gz'!",
                             "Line",
