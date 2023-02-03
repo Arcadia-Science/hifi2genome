@@ -6,6 +6,8 @@ process QUAST {
         'https://depot.galaxyproject.org/singularity/quast:5.2.0--py39pl5321h2add14b_1' :
         'quay.io/biocontainers/quast:5.2.0--py39pl5321h2add14b_1' }"
 
+    // modified from nf-core module to output to generic QUAST directory and copy the report.tsv file
+
     input:
     path("*")
 
