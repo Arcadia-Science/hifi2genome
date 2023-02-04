@@ -12,7 +12,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Pipeline summary
 
-<!-- TODO: Fill in short bullet-pointed list of the default steps in the pipeline -->
+This workflow only supports PacBio Hifi reads in `.fastq.` format for producing an assembly and QC stats. Each set of reads are assembled with `flye`, assembly statistics summarized with `QUAST`, reads mapped back to the assembly with `minimap2` and lineage specific QC stats produced with `BUSCO`. The workflow then reports the QC stats from `QUAST` and `BUSCO` into an `.html` report with `MultiQC`.
 
 ## Quick start
 
@@ -28,7 +28,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
    Note that some form of configuration will be needed so that Nextflow knows how to fetch the required software. This is usually done in the form of a config profile (`YOURPROFILE` in the example command above). You can chain multiple config profiles in a comma-separated string.
 
-   > - The pipeline comes with several config profiles, but we recommend using `docker` when possible, such as  `-profile test,docker`.
+   > - The pipeline comes with several config profiles, but we recommend using `docker` when possible, such as `-profile test,docker`.
    > - Please check [nf-core/configs](https://github.com/nf-core/configs#documentation) to see if a custom config file to run nf-core pipelines already exists for your Institute. If so, you can simply use `-profile <institute>` in your command. This will enable either `docker` or `singularity` and set the appropriate execution settings for your local compute environment.
    > - If you are using `singularity`, please use the [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use) command to download images first, before running the pipeline. Setting the [`NXF_SINGULARITY_CACHEDIR` or `singularity.cacheDir`](https://www.nextflow.io/docs/latest/singularity.html?#singularity-docker-hub) Nextflow options enables you to store and re-use the images from a central location for future pipeline runs.
    > - If you are using `conda`, it is highly recommended to use the [`NXF_CONDA_CACHEDIR` or `conda.cacheDir`](https://www.nextflow.io/docs/latest/conda.html) settings to store the environments in a central location for future pipeline runs.
@@ -39,16 +39,13 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
    nextflow run Arcadia-Science/hifi2genome -profile <docker/singularity/podman/shifter/charliecloud/conda/institute> --input samplesheet.csv --outdir <OUTDIR>
    ```
 
-## Full documentation
-
-<!-- TODO: Fill in this section with how to fully use the pipeline, what the inputs are and what the outputs look like. If this section ends up being super long, feel free to create a new docs/ directory and add details there. -->
-
-## Contributions and support
-
-<!-- TODO: Add CONTRIBUTING.MD that is specific to Arcadia Science -->
-
 ## Citations
 
-<!-- TODO: Add bibliography of tools and data used in your pipeline -->
+The `nf-core` template was used as a guideline for putting this workflow together. You can cite the `nf-core` publication as follows:
 
-An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
+> **The nf-core framework for community-curated bioinformatics pipelines.**
+>
+> Philip Ewels, Alexander Peltzer, Sven Fillinger, Harshil Patel, Johannes Alneberg, Andreas Wilm, Maxime Ulysse Garcia, Paolo Di Tommaso & Sven Nahnsen.
+>
+> _Nat Biotechnol._ 2020 Feb 13. doi: [10.1038/s41587-020-0439-x](https://dx.doi.org/10.1038/s41587-020-0439-x).
+> An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
