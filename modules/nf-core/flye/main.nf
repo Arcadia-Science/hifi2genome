@@ -1,6 +1,6 @@
 process FLYE {
     tag "$meta.id"
-    label 'process_high'
+    label 'process_high_memory'
 
     conda "bioconda::flye=2.9"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
