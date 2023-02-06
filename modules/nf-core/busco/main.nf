@@ -1,6 +1,6 @@
 process BUSCO {
     tag "$meta.id"
-    label 'process_high' // auto lineage requires higher memory 
+    label 'process_high_memory' // auto lineage requires higher memory
 
     conda "bioconda::busco=5.4.3"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
