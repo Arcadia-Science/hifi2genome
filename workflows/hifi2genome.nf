@@ -42,7 +42,7 @@ include { QUAST                   } from '../modules/local/nf-core-modified/quas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { FLYE                       } from '../modules/nf-core/flye/main'
-include { BUSCO                      } from '../modules/nf-core/busco/main'
+include { BUSCO                      } from '../modules/local/nf-core-modified/busco/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS} from '../modules/nf-core/custom/dumpsoftwareversions/main'
 include { MULTIQC                    } from '../modules/nf-core/multiqc/main'
 
