@@ -36,7 +36,7 @@ work                # Directory containing the nextflow working files
 
 ### Updating the pipeline
 
-When you run the above command, Nextflow automatically pulls the pipeline code from Github and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure you are running the latest version of the pipeline, regularly update the cached version with:
+When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure you are running the latest version of the pipeline, regularly update the cached version with:
 `nextflow pull Arcadia-Science/hifi2genome`
 
 ## Pipeline arguments
