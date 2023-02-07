@@ -12,7 +12,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Pipeline summary
 
-This workflow only supports PacBio Hifi reads in `.fastq.` format for producing an assembly and QC stats. Each set of reads are assembled with `flye`, assembly statistics summarized with `QUAST`, reads mapped back to the assembly with `minimap2` and lineage specific QC stats produced with `BUSCO`. The workflow then reports the QC stats from `QUAST` and `BUSCO` into an `.html` report with `MultiQC`.
+This workflow only supports PacBio Hifi reads in `.fastq.` format for producing an assembly and QC stats. Each set of reads are assembled with `flye`, assembly statistics are summarized with `QUAST`, reads are mapped back to the assembly with `minimap2` and lineage specific QC stats are produced with `BUSCO`. The workflow then reports the QC stats from `QUAST` and `BUSCO` into an `.html` report with `MultiQC`.
 
 ## Quick start
 
