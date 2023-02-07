@@ -1,6 +1,6 @@
 process BUSCO {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_high_memory' // auto lineage requires higher memory
 
     conda "bioconda::busco=5.4.3"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -15,7 +15,7 @@ process BUSCO {
 
     output:
     tuple val(meta), path("*-busco.batch_summary.txt"), emit: batch_summary
-    tuple val(meta), path("short_summary.*.txt")      , emit: short_summaries_txt, optional: true
+    tuple val(meta), path("short_summary.*.txt")      , emit: short_summaries_txt // required for multiqc report
     tuple val(meta), path("short_summary.*.json")     , emit: short_summaries_json, optional: true
     tuple val(meta), path("*-busco")                  , emit: busco_dir
     path "versions.yml"                               , emit: versions
