@@ -7,7 +7,7 @@ This page provides documentation on how to use the Arcadia-Science/hifi2genome w
 This pipeline only process PacBio Hifi sequences in a single file in fastq format. The hifi2genome workflow takes a CSV samplesheet listing the sample names and paths to the fastq files as direct input. It does not take the path to the directory of the fastq files, you must list them in a samplesheet. The CSV must contain the columns:
 
 `sample, fastq`
-Neither the `sample` or `fastq` columns may contain spaces, and the `fastq` column contains the path to your PacBio Hifi reads in a single fastq file. The path to the fastq file can be the full path to a local file or s3 URI. Valid examples look like the following:
+Neither the `sample` or `fastq` columns may contain spaces, and the `fastq` column contains the path to your PacBio Hifi reads in a single fastq file. The path to the fastq file can be the full path to a local file or URL. Valid examples look like the following:
 
 ```
 sample,fastq
