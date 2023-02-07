@@ -31,13 +31,16 @@
             "properties": {
                 "lineage": {
                     "type": "string",
-                    "default": "auto"
+                    "default": "null",
+                    "description": "Lineage to run against resulting assemblies. You must provide a lineage listed in https://busco.ezlab.org/list_of_lineages.html. We highly recommend selecting a lineage instead of running in 'auto' mode as this is resource intensive."
                 },
                 "mode": {
                     "type": "string",
-                    "default": "genome"
+                    "default": "genome",
+                    "description": "Mode for BUSCO to run in. Default is genome and should always be ran that way for the purposes of this workflow"
                 }
-            }
+            },
+            "required": ["lineage"]
         },
         "email_options": {
             "title": "Email options",
@@ -162,12 +165,12 @@
             "properties": {
                 "multiqc_title": {
                     "type": "string",
-                    "default": null,
+                    "default": "None",
                     "hidden": true
                 },
                 "multiqc_logo": {
                     "type": "string",
-                    "default": null,
+                    "default": "None",
                     "hidden": true
                 },
                 "max_multiqc_email_size": {
@@ -177,12 +180,12 @@
                 },
                 "multiqc_methods_description": {
                     "type": "string",
-                    "default": null,
+                    "default": "None",
                     "hidden": true
                 },
                 "multiqc_config": {
                     "type": "string",
-                    "default": null,
+                    "default": "None",
                     "hidden": true
                 }
             }
