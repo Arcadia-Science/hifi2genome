@@ -4,7 +4,7 @@ This page describes the output files and report produced by the pipeline. The di
 
 ## Pipeline Overview
 
-This pipeline takes in PacBio Hifi reads sequenced from a single organism, assembles with `Flye`, assesses the assembly with `QUAST`, performs lineage-specific QC with `BUSCO`, and maps the reads back to the resulting assembly with `minimap2`. The pipeline then reports the QC stats fro `QUAST` and `BUSCO` with `MultiQC`.
+This pipeline takes in PacBio Hifi reads sequenced from a single organism, assembles them with `Flye`, assesses the assembly with `QUAST`, performs lineage-specific QC with `BUSCO`, and maps the reads back to the resulting assembly with `minimap2`. The pipeline then reports the QC stats fro `QUAST` and `BUSCO` with `MultiQC`.
 
 ### Assembly
 
