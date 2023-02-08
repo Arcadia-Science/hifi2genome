@@ -82,7 +82,7 @@ The following are command-line arguments that are specific to the pipeline that 
 
 #### `--lineage`
 
-The selected BUSCO lineage to run for resulting genome assemblies. By default the lineage is set to `auto` to run auto lineage detection instead of a predetermined lineage set.
+The selected BUSCO lineage to run for resulting genome assemblies. This is a required parameter and is not set to a default setting. We highly recommonded NOT using the 'auto' lineage selection as in our experience this is highly resource intensive and is unnecessary for this workflow where the user likely already knows the desired lineage of the resulting assembly. See [https://busco.ezlab.org/list_of_lineages.html](https://busco.ezlab.org/list_of_lineages.html) for a full list of BUSCO lineages to choose from.
 
 #### `--mode`
 
