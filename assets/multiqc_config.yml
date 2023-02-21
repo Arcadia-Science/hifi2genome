@@ -5,11 +5,14 @@ report_section_order:
     order: -1000
   busco:
     order: -1001
-  "Arcadia-Science-hifi2genome-methods-description":
+  Samtools:
     order: -1002
-  software_versions:
+  "Arcadia-Science-hifi2genome-methods-description":
     order: -1003
-  "Arcadia-Science-hifi2genome-summary":
+  software_versions:
     order: -1004
+  "Arcadia-Science-hifi2genome-summary":
+    order: -1005
 
 show_analysis_paths: False
+log_filesize_limit: 2000000000 # read larger files and not automatically skip

@@ -4,6 +4,7 @@
 
 include { MINIMAP2_INDEX } from '../../modules/nf-core/minimap2/index'
 include { MINIMAP2_ALIGN } from '../../modules/local/nf-core-modified/minimap2/align'
+include { SAMTOOLS_STATS } from '../../modules/nf-core/samtools/stats/main'
 
 workflow MINIMAP2_SUBWORKFLOW {
     take:
@@ -20,11 +21,17 @@ workflow MINIMAP2_SUBWORKFLOW {
 
     // align reads to index
     MINIMAP2_ALIGN(reads, ch_index)
-    ch_align_bam = MINIMAP2_ALIGN.out.bam
+    ch_align_bam = MINIMAP2_ALIGN.out.sorted_indexed_bam
+
+    // get samtools stats
+    SAMTOOLS_STATS(ch_align_bam, assembly)
+    ch_stats = SAMTOOLS_STATS.out.stats
+    ch_versions = ch_versions.mix(SAMTOOLS_STATS.out.versions)
 
     emit:
     ch_index
     ch_align_bam
+    ch_stats
     versions = ch_versions
 
 }
