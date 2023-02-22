@@ -103,6 +103,7 @@ workflow HIFI2GENOME {
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
     ch_multiqc_files = ch_multiqc_files.mix(BUSCO.out.short_summaries_txt.collect{it[1]}.ifEmpty([]))
     ch_multiqc_files = ch_multiqc_files.mix(QUAST.out.results.collect().ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(MINIMAP2_SUBWORKFLOW.out.ch_stats.collect().ifEmpty([]))
 
     MULTIQC(
         ch_multiqc_files.collect(),

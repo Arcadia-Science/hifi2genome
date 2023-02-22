@@ -16,8 +16,8 @@ process MINIMAP2_ALIGN {
     tuple val(index_meta), path(index)
 
     output:
-    tuple val(meta), path("*.bam"), emit: bam
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*.sorted.bam"), path("*.bam.bai")     , emit: sorted_indexed_bam
+    path "versions.yml"                                          , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -33,8 +33,8 @@ process MINIMAP2_ALIGN {
         $index \\
         $reads | \\
         samtools view -@ $task.cpus -bS | \\
-        samtools sort -@ $task.cpus -o ${prefix}.bam
-    samtools index ${prefix}.bam
+        samtools sort -@ $task.cpus -o ${prefix}.sorted.bam
+    samtools index ${prefix}.sorted.bam ${prefix}.bam.bai
 
 
     cat <<-END_VERSIONS > versions.yml
