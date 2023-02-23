@@ -35,7 +35,9 @@ Below are Nextflow and pipeline-specific citations you should include when using
 > Gurevich A, Saveliev V, Vyahhi N, Tesler G. QUAST: quality assessment tool for genome assemblies. (2013). [doi:10.1093/bioinformatics/btt086](https://doi.org/10.1093/bioinformatics/btt086)
 
 ## [Samtools](https://academic.oup.com/bioinformatics/article/25/16/2078/204688)
+
 > Li H, Handsaker B, Wysoker A, Fennell T, Ruan J, Homer N, Marth G, Abecasis G, Durbin R,1000 Genome Project Data PRocessing Subgroup. (2009). [https://doi.org/10.1093/bioinformatics/btp352](https://doi.org/10.1093/bioinformatics/btp352)
+
 # Software packaging/containerisation tools
 
 - [Docker](https://dl.acm.org/doi/10.5555/2600239.2600241)

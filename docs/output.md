@@ -24,7 +24,7 @@ The pipeline maps the original reads back to the corresponding resulting assembl
 
 ### Samtools stats
 
-Mapping statistics such as % of reads mapping to the assembly and alignment metrics are produced using `samtools stats` and displayed in the MultiQC report. 
+Mapping statistics such as % of reads mapping to the assembly and alignment metrics are produced using `samtools stats` and displayed in the MultiQC report.
 
 ### Pipeline overview
 
