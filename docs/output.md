@@ -22,6 +22,10 @@ For each assembly, lineage specific QC stats are reported. By default the `auto`
 
 The pipeline maps the original reads back to the corresponding resulting assembly to facilitate downstream manual coverage checking with a program such as IGV. In the `minimap2` directory are the reference index created by `minimap2` for each assembly and the reads mapped back to the reference index in BAM format. The BAM file has been sorted and indexed.
 
+### Samtools stats
+
+Mapping statistics such as % of reads mapping to the assembly and alignment metrics are produced using `samtools stats` and displayed in the MultiQC report. 
+
 ### Pipeline overview
 
 The `pipeline_overview` directory provides information about how the pipeline was run.
