@@ -25,7 +25,6 @@ workflow MINIMAP2_SUBWORKFLOW {
         .map{meta, index -> [meta.id, meta, index]}
         .combine(ch_reads, by:0)
         .map{id, index_meta, index, reads_meta, reads -> [index_meta, index, reads_meta, reads]}
-        .view()
 
     // align reads to index
     MINIMAP2_ALIGN(ch_mapping)
