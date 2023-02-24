@@ -1,5 +1,5 @@
 process MINIMAP2_ALIGN {
-    tag "$meta.id"
+    tag "$index_meta.id"
     label 'process_medium'
 
     // Note: the versions here need to match the versions used in the mulled container below and minimap2/index
@@ -12,19 +12,18 @@ process MINIMAP2_ALIGN {
     // fixes samtools piping to go through view, sort, and index to a final BAM file
 
     input:
-    tuple val(meta), path(reads)
-    tuple val(index_meta), path(index)
+    tuple val(index_meta), path(index), val(reads_meta), path(reads)
 
     output:
-    tuple val(meta), path("*.sorted.bam"), path("*.bam.bai")     , emit: sorted_indexed_bam
-    path "versions.yml"                                          , emit: versions
+    tuple val(index_meta), path("*.sorted.bam"), path("*.bam.bai")     , emit: sorted_indexed_bam
+    path "versions.yml"                                                , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    def prefix = task.ext.prefix ?: "${index_meta.id}"
 
     """
     minimap2 \\
