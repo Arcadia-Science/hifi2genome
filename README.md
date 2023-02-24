@@ -45,4 +45,5 @@ The `nf-core` template was used as a guideline for putting this workflow togethe
 
 > **The nf-core framework for community-curated bioinformatics pipelines.**
 > Ewels PA, Peltzer A, Fillinger S, Patel H, Alneberg J, Wilm A, Garcia MU, Di Tommaso P, Nahnsen S. The nf-core framework for community-curated bioinformatics pipelines. (2020). [doi: 10.1038/s41587-020-0439-x](https://doi.org/10.1038/s41587-020-0439-x)
+
 > An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
