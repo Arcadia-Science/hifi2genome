@@ -94,26 +94,26 @@ workflow HIFI2GENOME {
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
     )
 
-//     // multiqc reporting
-//     workflow_summary = WorkflowHifi2Genome.paramsSummaryMultiqc(workflow, summary_params)
-//     ch_workflow_summary = Channel.value(workflow_summary)
+    // multiqc reporting
+    workflow_summary = WorkflowHifi2Genome.paramsSummaryMultiqc(workflow, summary_params)
+    ch_workflow_summary = Channel.value(workflow_summary)
 
-//     ch_multiqc_files = Channel.empty()
-//     ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
-//     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
-//     ch_multiqc_files = ch_multiqc_files.mix(BUSCO.out.short_summaries_txt.collect{it[1]}.ifEmpty([]))
-//     ch_multiqc_files = ch_multiqc_files.mix(QUAST.out.results.collect().ifEmpty([]))
-//     ch_multiqc_files = ch_multiqc_files.mix(MINIMAP2_SUBWORKFLOW.out.ch_stats.collect().ifEmpty([]))
+    ch_multiqc_files = Channel.empty()
+    ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
+    ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
+    ch_multiqc_files = ch_multiqc_files.mix(BUSCO.out.short_summaries_txt.collect{it[1]}.ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(QUAST.out.results.collect().ifEmpty([]))
+    ch_multiqc_files = ch_multiqc_files.mix(MINIMAP2_SUBWORKFLOW.out.ch_stats.collect().ifEmpty([]))
 
-//     MULTIQC(
-//         ch_multiqc_files.collect(),
-//         ch_multiqc_config.collect().ifEmpty([]),
-//         ch_multiqc_custom_config.collect().ifEmpty([]),
-//         ch_multiqc_logo.collect().ifEmpty([])
+    MULTIQC(
+        ch_multiqc_files.collect(),
+        ch_multiqc_config.collect().ifEmpty([]),
+        ch_multiqc_custom_config.collect().ifEmpty([]),
+        ch_multiqc_logo.collect().ifEmpty([])
 
-//     )
-//     multiqc_report = MULTIQC.out.report.toList()
-//     ch_versions = ch_versions.mix(MULTIQC.out.versions)
+    )
+    multiqc_report = MULTIQC.out.report.toList()
+    ch_versions = ch_versions.mix(MULTIQC.out.versions)
 }
 
 /*
