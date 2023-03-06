@@ -8,11 +8,13 @@
 
 **Arcadia-Science/hifi2genome** is a workflow for assembling PacBio Hifi reads and performing QC stats on the resulting assemblies.
 
+![](img/hifi2genome_overview_figure.png)
+
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
 
 ## Pipeline summary
 
-This workflow only supports PacBio Hifi reads in `.fastq.` format for producing an assembly and QC stats. Each set of reads are assembled with `flye`, assembly statistics are summarized with `QUAST`, reads are mapped back to the assembly with `minimap2` and lineage specific QC stats are produced with `BUSCO`. The workflow then reports the QC stats from `QUAST` and `BUSCO` into an `.html` report with `MultiQC`.
+This workflow only supports PacBio Hifi reads in `.fastq.` format for producing an assembly and QC stats. Each set of reads are assembled with `flye`, assembly statistics are summarized with `QUAST`, reads are mapped back to the assembly with `minimap2`, mapping statistics produced with `samtools stats` and lineage specific QC stats are produced with `BUSCO`. The workflow then reports the QC stats from `QUAST` and `BUSCO` and mapping statistics from `samtools stats` into an `.html` report with `MultiQC`.
 
 ## Quick start
 
@@ -36,7 +38,7 @@ This workflow only supports PacBio Hifi reads in `.fastq.` format for producing 
 4. Start running your own analysis! The workflow expects a CSV formatted samplesheet with two columns: `sample` and `fastq` where the `sample` column contains the name of your sample (with no spaces!) and the `fastq` column contains the full path of the location of your reads in `.fastq` format. The fastq files can be in `.fq`, `.fastq` or compressed `.fq.gz` and `.fastq.gz`.
 
    ```console
-   nextflow run Arcadia-Science/hifi2genome -profile <docker/singularity/podman/shifter/charliecloud/conda/institute> --input samplesheet.csv --outdir <OUTDIR>
+   nextflow run Arcadia-Science/hifi2genome -profile <docker/singularity/podman/shifter/charliecloud/conda/institute> --input samplesheet.csv --lineage <BUSCO_LINEAGE> --outdir <OUTDIR>
    ```
 
 ## Citations
