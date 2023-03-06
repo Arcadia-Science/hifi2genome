@@ -12,12 +12,11 @@ process MINIMAP2_ALIGN {
     // fixes samtools piping to go through view, sort, and index to a final BAM file
 
     input:
-    tuple val(meta), path(reads)
-    tuple val(index_meta), path(index)
+    tuple val(meta), path(index), path(reads)
 
     output:
     tuple val(meta), path("*.sorted.bam"), path("*.bam.bai")     , emit: sorted_indexed_bam
-    path "versions.yml"                                          , emit: versions
+    path "versions.yml"                                                , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
