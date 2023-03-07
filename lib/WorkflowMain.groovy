@@ -9,9 +9,8 @@ class WorkflowMain {
     //
     public static String citation(workflow) {
         return "If you use ${workflow.manifest.name} for your analysis please cite:\n\n" +
-            // TODO: Add Zenodo DOI for pipeline after first release
-            //"* The pipeline\n" +
-            //"  https://doi.org/10.5281/zenodo.XXXXXXX\n\n" +
+            "* The pipeline\n" +
+            "https://doi.org/10.5281/zenodo.7706592\n\n" +
             "* The nf-core framework\n" +
             "  https://doi.org/10.1038/s41587-020-0439-x\n\n" +
             "* Software dependencies\n" +
@@ -22,7 +21,6 @@ class WorkflowMain {
     // Print help to screen if required
     //
     public static String help(workflow, params, log) {
-        // TODO: Update the help string
         def command = "nextflow run ${workflow.manifest.name} -profile docker"
         def help_string = ''
         help_string += NfcoreTemplate.logo(workflow, params.monochrome_logs)
